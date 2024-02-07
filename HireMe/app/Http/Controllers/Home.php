@@ -24,7 +24,6 @@ class Home extends Controller
             return view('admin.dashboard');
           }
           
-
         }
     }
 
