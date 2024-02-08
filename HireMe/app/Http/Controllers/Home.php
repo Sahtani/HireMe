@@ -17,11 +17,11 @@ class Home extends Controller
         if(Auth::id()){
           $role=Auth()->user()->role;
           if($role=='user'){
-             return view('user.create');
+             return redirect(route("user.create"));
           }else if($role=='company'){
-            return view('company');
+            return redirect(route("company.create"));
           }else if($role=='admin'){
-            return view('admin.dashboard');
+            return redirect('admin.dashboard');
           }
           
         }

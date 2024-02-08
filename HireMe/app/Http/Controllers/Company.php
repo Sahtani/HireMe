@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateRequest;
+use App\Models\Company as ModelsCompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Company extends Controller
 {
@@ -12,8 +16,9 @@ class Company extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        //
+       
     }
 
     /**
@@ -23,7 +28,7 @@ class Company extends Controller
      */
     public function create()
     {
-        //
+        return view('company.create');
     }
 
     /**
@@ -32,9 +37,24 @@ class Company extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CreateRequest $request)
+    { 
+        $company = $request->validated();
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('company', 'public');
+            $company['image'] = $imagePath;
+
+        }
+        
+        $company['user_id']=Auth::id(); 
+        // Store validated data
+       
+        $company = ModelsCompany::create($company);
+       
+      
+        return redirect()->route('company.home');
     }
 
     /**

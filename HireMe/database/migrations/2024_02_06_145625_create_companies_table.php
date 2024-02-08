@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('slogan');
             $table->string('industry');
-            $table->string('desc');
+            $table->string('desc')->nullable();
             $table->string('phone_number')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();

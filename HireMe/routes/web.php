@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Company;
 use App\Http\Controllers\Home;
+use App\Http\Controllers\Jobseeker as ControllersJobseeker;
 use App\Http\Controllers\ProfileController;
+use App\Models\Jobseeker;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,9 +22,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', [Home::class,'index'])->name('index');
+
 // route of jobseeker
-// Route::prefix()
+Route::prefix('home')->name('user.')->group(function(){
+    Route::get('/', [Home::class, 'index'])->name('index');
+    Route::get('/create', [ControllersJobseeker::class, 'create'])->name('create');
+    Route::post('/store', [ControllersJobseeker::class, 'store'])->name("store");
+
+
+});
+Route::prefix('company')->name('company.')->group(function(){
+    
+    Route::get('/', [Home::class, 'index'])->name('index');
+
+    Route::get('/create', [Company::class, 'create'])->name('create');
+   
+    Route::post('/store', [Company::class, 'store'])->name("store");
+
+
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
