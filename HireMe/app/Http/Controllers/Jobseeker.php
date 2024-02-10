@@ -7,6 +7,7 @@ use App\Models\Jobseeker as ModelsJobseeker;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class Jobseeker extends Controller
 {
@@ -42,19 +43,21 @@ class Jobseeker extends Controller
             $Jobseeker = $request->validated();
     
             // Handle image upload
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('jobseeker_images', 'public');
-                $Jobseeker['image'] = $imagePath;
-
+            if (request()->hasFile('image')) {
+                $image = request()->file('image');
+                $filePath = $image->store('public/uploads');
+                $fileName = explode("/", $filePath);
+                $Jobseeker["image"] = $fileName[2];
+            } else {
+                $imageName = 'jobseeker.png';
             }
             
             $Jobseeker['user_id']=Auth::id();
-            // dd( $Jobseeker['user_id']);
-        // dd($Jobseeker);
-            // Store validated data
+
             $Jobseeker = ModelsJobseeker::create($Jobseeker);
         
-            return redirect()->route('user.profile');
+            return redirect()->route('user.show');
+            // return view('user.dashbord');
         }
     
             // return redirect()->route('user.', ['slug' => $post->slug, 'id' => $post->id])->with('success','article  été bien créer');
@@ -67,10 +70,19 @@ class Jobseeker extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show()
+    {  
+        $jobseeker = ModelsJobseeker::where('user_id', Auth::id())->first();
+        return view('user/dashbord', ['jobseeker' => $jobseeker, 'user' => Auth::user()]);
     }
+// }
+//         $jobseeker = ModelsJobseeker::where('user_id', Auth::id())->first();
+//         // $Jobseeker=ModelsJobseeker::find(Auth::user())->get();
+//        dd($jobseeker->email);
+//         // Pass jobseeker information to your view for display
+//         return view('user/dashbord', ['jobseeker' => $jobseeker]);
+   
+    
 
     /**
      * Show the form for editing the specified resource.

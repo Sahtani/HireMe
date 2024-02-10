@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Company;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Jobseeker as ControllersJobseeker;
 use App\Http\Controllers\ProfileController;
+
 use App\Models\Jobseeker;
 use Illuminate\Support\Facades\Route;
-
+use Khrigo\SkillsList\SkillsList as skills;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,13 @@ Route::prefix('home')->name('user.')->group(function(){
     Route::get('/', [Home::class, 'index'])->name('index');
     Route::get('/create', [ControllersJobseeker::class, 'create'])->name('create');
     Route::post('/store', [ControllersJobseeker::class, 'store'])->name("store");
+    Route::get('/show',[ControllersJobseeker::class, 'show'])->name('show');
+    
+   
 
 
 });
+Route::post('home/store', [ExperienceController::class, 'store'])->name("storeexperience");
 Route::prefix('company')->name('company.')->group(function(){
     
     Route::get('/', [Home::class, 'index'])->name('index');
@@ -38,12 +44,14 @@ Route::prefix('company')->name('company.')->group(function(){
     Route::get('/create', [Company::class, 'create'])->name('create');
    
     Route::post('/store', [Company::class, 'store'])->name("store");
+    
+
 
 
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('user/dashbord');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -51,5 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/skills', function()
+{
+	$skill=new Skills();
+  return  $skill->getList('json');
+});
+
 
 require __DIR__.'/auth.php';

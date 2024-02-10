@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequest extends FormRequest
+class CompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,12 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required', // Image file validation, max size: 2MB
-            'title' => 'required|string|min:4|max:255',
-            'post' => 'required|string|min:4|max:255',
+            'image' => 'required|max:2048', // Image file validation, max size: 2MB
+         
             'industry' => 'required|string|min:4|max:255',
-            'adresse' => 'required|string|min:4|max:255',
             'phone' => 'required|string|max:255',
-            'about' => 'required|string|min:10',
-    
-            // mimes:jpeg,png,jpg,gif|
-            // 'title'=>['required','min:8'],
-            // // 'slug'=>['required',Rule::unique('posts')->ignore($this->post)],
-            // 'content'=>['required'],
-
+            'slogan' => 'required|string|max:255',
+            'description' => 'required|string|min:10',
         ];
     }
 }

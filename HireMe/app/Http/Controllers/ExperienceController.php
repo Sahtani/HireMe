@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CompanyRequest;
-use App\Http\Requests\CreateRequest;
-use App\Models\Company as ModelsCompany;
+use App\Http\Requests\ExperienceRequest;
+use App\Models\Experience;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller;
 
-class Company extends Controller
+class ExperienceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,8 @@ class Company extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
-       
+        //
     }
 
     /**
@@ -29,7 +26,7 @@ class Company extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        //
     }
 
     /**
@@ -38,24 +35,15 @@ class Company extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanyRequest $request)
-    { 
-        $company = $request->validated();
+    public function store(ExperienceRequest $request)
+  
+    {
+     
+        $experience=$request->validated();
+    
+        Experience::create($experience);
+        return redirect()->route('user.show')->with('success', 'Experience created successfully.');
 
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads', 'public');
-            $company['image'] = $imagePath;
-
-        }
-        
-        $company['user_id']=Auth::id(); 
-        // Store validated data
-       
-        $company = ModelsCompany::create($company);
-       
-      
-        return redirect()->route('company.home');
     }
 
     /**

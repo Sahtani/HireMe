@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CompanyRequest;
-use App\Http\Requests\CreateRequest;
-use App\Models\Company as ModelsCompany;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Mpociot\Skills\Skill;
 
-class Company extends Controller
+class SkillController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   
 
+    public function index()
     {
-       
+        $skills = Skill::pluck('name', 'id');
+    
+        return view('your-view', compact('skills'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +30,7 @@ class Company extends Controller
      */
     public function create()
     {
-        return view('company.create');
+    
     }
 
     /**
@@ -38,24 +39,9 @@ class Company extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanyRequest $request)
-    { 
-        $company = $request->validated();
-
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads', 'public');
-            $company['image'] = $imagePath;
-
-        }
-        
-        $company['user_id']=Auth::id(); 
-        // Store validated data
-       
-        $company = ModelsCompany::create($company);
-       
-      
-        return redirect()->route('company.home');
+    public function store(Request $request)
+    {
+        //
     }
 
     /**

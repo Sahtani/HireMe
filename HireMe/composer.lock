@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acd32616e207496d032cf477e569d889",
+    "content-hash": "720916458580b3aaeb12daf3c9e3d143",
     "packages": [
         {
             "name": "brick/math",
@@ -1092,6 +1092,100 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "khrigo/laravel-skills-list",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/khrigo/laravel-skills-list.git",
+                "reference": "cde57fe5dee82d7fbdbab2939e079110c895a569"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/khrigo/laravel-skills-list/zipball/cde57fe5dee82d7fbdbab2939e079110c895a569",
+                "reference": "cde57fe5dee82d7fbdbab2939e079110c895a569",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.8|^6|^7|^8|^9|^10",
+                "khrigo/skills-list": "1.2.*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Khrigo\\SkillsList\\SkillsListServiceProvider"
+                    ],
+                    "aliases": {
+                        "Skills": "Khrigo\\SkillsList\\SkillsListFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Khrigo\\SkillsList\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ihor Khrypchenko",
+                    "email": "me@khrigo.com"
+                }
+            ],
+            "description": "List of all LinkedIn skills for Laravel",
+            "keywords": [
+                "laravel",
+                "skills"
+            ],
+            "support": {
+                "issues": "https://github.com/khrigo/laravel-skills-list/issues",
+                "source": "https://github.com/khrigo/laravel-skills-list/tree/1.2.0"
+            },
+            "time": "2023-08-10T16:38:15+00:00"
+        },
+        {
+            "name": "khrigo/skills-list",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/khrigo/skills-list.git",
+                "reference": "4120ffe59d9d88c8b753037737800d9269ca514b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/khrigo/skills-list/zipball/4120ffe59d9d88c8b753037737800d9269ca514b",
+                "reference": "4120ffe59d9d88c8b753037737800d9269ca514b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^8.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ihor Khrypchenko",
+                    "email": "me@khrigo.com"
+                }
+            ],
+            "description": "List of all LinkedIn skills.",
+            "support": {
+                "issues": "https://github.com/khrigo/skills-list/issues",
+                "source": "https://github.com/khrigo/skills-list/tree/1.2.1"
+            },
+            "time": "2023-08-10T16:37:38+00:00"
         },
         {
             "name": "laravel/framework",

@@ -24,13 +24,15 @@ return new class extends Migration
             $table->string('location');
             $table->timestamps();
         });
-        Schema::create('job_offer_jobseeker', function (Blueprint $table){
-            $table->id();
-            $table->foreignIdFor(Jobseeker::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(JobOffer::class)->constrained()->cascadeOnDelete();
+        Schema::create('job_offer_jobseeker', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('jobseeker_id')->unsigned();
+            $table->bigInteger('job_offer_id')->unsigned();
             
-
+            $table->foreign('jobseeker_id')->references('id')->on('jobseekers')->onDelete('cascade');
+            $table->foreign('job_offer_id')->references('id')->on('job_offers')->onDelete('cascade');
         });
+        
 
     }
 

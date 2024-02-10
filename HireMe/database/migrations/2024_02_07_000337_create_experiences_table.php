@@ -23,13 +23,13 @@ return new class extends Migration
             $table->string('desc');          
             $table->timestamps();
         });
-        Schema::create('cv_experience', function (Blueprint $table){
-            $table->id();
-            $table->foreignIdFor(Cv::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Experience::class)->constrained()->cascadeOnDelete();
+        // Schema::create('cv_experience', function (Blueprint $table){
+        //     $table->id();
+        //     $table->foreignIdFor(Cv::class)->constrained()->cascadeOnDelete();
+        //     $table->foreignIdFor(Experience::class)->constrained()->cascadeOnDelete();
             
 
-        });
+        // });
     }
 
     /**

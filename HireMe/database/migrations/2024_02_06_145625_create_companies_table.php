@@ -16,11 +16,11 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->string('slogan');
             $table->string('industry');
-            $table->string('desc')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->text('description');
+            $table->string('phone');
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });

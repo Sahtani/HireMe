@@ -17,11 +17,11 @@
                 <div class="flex">
                     <h1 class="font-bold uppercase text-5xl">Send us a <br /> message</h1>
                 </div>
-                <form action="{{ route('company.store') }}" class="" method="post">
+                <form action="{{ route('company.store') }}" class="" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
                         <div>
-                             <input name="image" value="{{ old('image') }}"
+                             <input type="file" name="image" accept="image/*" value="{{ old('image') }}" 
                             class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                             type="file" placeholder="Logo*" />
                         @error('image')
@@ -59,7 +59,7 @@
                     </div>
                     <div class="my-4">
                         <textarea placeholder="Description*" value="" name="description"
-                            class="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">{{ old('Description') }}</textarea>
+                            class="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">{{ old('description') }}</textarea>
                             @error('description')
                             <div class="text-sm text-red-500">{{ $message }}</div>
                         @enderror
