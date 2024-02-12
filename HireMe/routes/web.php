@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\Company;
+use App\Http\Controllers\CursusController;
+
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Jobseeker as ControllersJobseeker;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\LanguageController;
 use App\Models\Jobseeker;
 use Illuminate\Support\Facades\Route;
 use Khrigo\SkillsList\SkillsList as skills;
@@ -31,12 +34,24 @@ Route::prefix('home')->name('user.')->group(function(){
     Route::get('/create', [ControllersJobseeker::class, 'create'])->name('create');
     Route::post('/store', [ControllersJobseeker::class, 'store'])->name("store");
     Route::get('/show',[ControllersJobseeker::class, 'show'])->name('show');
-    
+    // experiencs
+    Route::post('/new', [ExperienceController::class, 'store'])->name('storeexperience'); 
+
+    // cursus
+    Route::get('/newcursus',[CursusController::class, 'create'])->name('createcursus');
+    Route::post('/storecursus',[CursusController::class, 'store']);
+    // skills
+    Route::post('/storeskill',[SkillController::class, 'store'])->name('storeskill');
+    // Language
+    Route::get('/newlangue',[LanguageController::class ,'create'])->name('createcursus');
+    Route::post('/storelangue',[LanguageController::class ,'store'])->name('storelangue');
+
+
    
 
 
 });
-Route::post('home/store', [ExperienceController::class, 'store'])->name("storeexperience");
+  
 Route::prefix('company')->name('company.')->group(function(){
     
     Route::get('/', [Home::class, 'index'])->name('index');

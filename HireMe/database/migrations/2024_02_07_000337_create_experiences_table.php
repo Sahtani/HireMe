@@ -19,17 +19,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('company');
-            $table->string('periode');
-            $table->string('desc');          
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('desc');  
+            $table->foreignIdFor(Cv::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
-        // Schema::create('cv_experience', function (Blueprint $table){
-        //     $table->id();
-        //     $table->foreignIdFor(Cv::class)->constrained()->cascadeOnDelete();
-        //     $table->foreignIdFor(Experience::class)->constrained()->cascadeOnDelete();
-            
-
-        // });
     }
 
     /**

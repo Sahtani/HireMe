@@ -4,6 +4,7 @@
             {{ ('Dashboard') }}
         </h2>
     </x-slot> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
 
     <div class="py-12">
@@ -82,8 +83,9 @@
                                             <div class="">
                                                 <div class="flex justify-between flex-wrap">
                                                     <h2 class="text-xl font-bold mt-6 mb-4">Expereince</h2>
-                                                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" 
-                                                        class="block text-white " type="button">
+                                                    <button data-modal-target="crud-modal"
+                                                        data-modal-toggle="crud-modal" class="block text-white "
+                                                        type="button">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24"
                                                             style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
@@ -93,71 +95,62 @@
                                                             <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
                                                         </svg></button>
                                                 </div>
-                                              
+
                                             </div>
                                             <div class="mb-6">
+                                                @foreach ($exs as $ex )
                                                 <div class="flex justify-between flex-wrap gap-2 w-full">
-                                                    <span class="text-gray-700 font-bold">Web Developer</span>
+                                                    <span class="text-gray-700 font-bold">{{ $ex->title }}</span>
                                                     <p>
-                                                        <span class="text-gray-700 mr-2">at ABC Company</span>
-                                                        <span class="text-gray-700">2017 - 2019</span>
+                                                        <span class="text-gray-700 mr-2">at {{ $ex->company }}</span>
+                                                        <span class="text-gray-700">{{ \Carbon\Carbon::parse($ex->start_date)->format('Y') }} - {{ \Carbon\Carbon::parse($ex->end_date)->format('Y') }}</span>
                                                     </p>
                                                 </div>
                                                 <p class="mt-2">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est
-                                                    vitae
-                                                    tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus
-                                                    non velit egestas
-                                                    suscipit.
-                                                </p>
+                                                   {{ $ex->desc }}
+                                                </p>  
+                                                @endforeach
+                                                
                                             </div>
                                         </div>
-                                        
+
 
                                     </div>
                                     <div class="bg-white border rounded-lg  border-gray-600 mt-8 shadow">
                                         <div class="p-3">
-                                           
-                                            
                                             <div>
                                                 <div class="">
                                                     <div class="flex justify-between flex-wrap">
                                                         <h2 class="text-xl font-bold mt-6 mb-4">Formation</h2>
-                                                        <button data-modal-target="authentication-modal"
-                                                            data-modal-toggle="authentication-modal"
-                                                            class="block text-white " type="button">
-    
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24"
-                                                                style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                                                                <path
-                                                                    d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
-                                                                </path>
-                                                                <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
-                                                            </svg></button>
+                                                        <a href="{{ route('user.createcursus') }}">
+                                                            <button class="block text-white " type="button">
+
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24"
+                                                                    style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                                                    <path
+                                                                        d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
+                                                                    </path>
+                                                                    <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
+                                                                </svg></button>
+                                                        </a>
+
                                                     </div>
-                                                  
+
                                                 </div>
-                                            <div class="mb-6">
-                                                
-                                                </div>
+                                                @foreach ($cursus as $cur )
                                                 <div class="flex justify-between flex-wrap gap-2 w-full">
-                                                    <span class="text-gray-700 font-bold">Web Developer</span>
+                                                    <span class="text-gray-700 font-bold">{{ $cur->diplome }}</span>
                                                     <p>
-                                                        <span class="text-gray-700 mr-2">at ABC Company</span>
-                                                        <span class="text-gray-700">2017 - 2019</span>
+                                                        <span class="text-gray-700 mr-2">at {{ $cur->etablissement }}</span>
+                                                        <span class="text-gray-700">{{ \Carbon\Carbon::parse($ex->start_date)->format('Y') }} - {{ \Carbon\Carbon::parse($ex->end_date)->format('Y') }}</span>
                                                     </p>
                                                 </div>
-                                                <p class="mt-2">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est
-                                                    vitae
-                                                    tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus
-                                                    non velit egestas
-                                                    suscipit.
-                                                </p>
+                                                @endforeach
+                                               
                                             </div>
                                         </div>
-                                        
+
 
                                     </div>
 
@@ -196,14 +189,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @foreach ($skills as $skill )
                                                 <div class="ml-4">
                                                     <div>
                                                         <div>
-                                                            <h2 class="font-medium text-xl text-black  ">Html 5</h2>
+                                                            <h2 class="font-medium text-xl text-black  ">{{ $skill->name }}</h2>
                                                         </div>
                                                     </div>
-                                                    <hr class="w-[95%]  h-[1px] border-[#ffffff1f] mx-auto mt-7 mb-7">
+                                                    <hr class="w-[95%]  h-[1px] border-[#ffffff1f] mx-auto mt-3">
                                                 </div>
+                                                @endforeach
+                                              
                                             </div>
                                         </div>
                                     </div>
@@ -227,8 +223,8 @@
 
                                                     <div>
                                                         <div class="flex items-center">
-                                                            <button data-modal-target="authentication-modal"
-                                                                data-modal-toggle="authentication-modal"
+                                                            <a href="{{ route("user.createcursus") }}">
+                                                                <button 
                                                                 class="block text-white " type="button">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24"
@@ -238,13 +234,19 @@
                                                                     </path>
                                                                     <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
                                                                 </svg></button>
+                                                            </a>
+                                                           
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @foreach ($langues as $langue )
+                                                    
+                                                @endforeach
                                                 <div class="ml-4">
                                                     <div>
                                                         <div>
-                                                            <h2 class="font-medium text-xl text-black  ">Html 5</h2>
+                                                            <h2 class="font-medium text-xl text-black  ">{{ $langue->name }}</h2>
+                                                            <p class="text-sm text-gra-400">{{ $langue->level }}</p>
                                                         </div>
                                                     </div>
                                                     <hr class="w-[95%]  h-[1px] border-[#ffffff1f] mx-auto mt-7 mb-7">
@@ -252,7 +254,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                  
+
                                 </div>
 
                                 <div class="col-span-4 sm:col-span-9 border border-gray-600 mt-8">
@@ -263,7 +265,8 @@
                                         </h3>
                                         <div class="flex justify-center items-center gap-6 my-6">
                                             <a class="text-gray-700 hover:text-orange-600"
-                                                aria-label="Visit TrendyMinds LinkedIn" href="" target="_blank">
+                                                aria-label="Visit TrendyMinds LinkedIn" href=""
+                                                target="_blank">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                                     class="h-6">
                                                     <path fill="currentColor"
@@ -272,7 +275,8 @@
                                                 </svg>
                                             </a>
                                             <a class="text-gray-700 hover:text-orange-600"
-                                                aria-label="Visit TrendyMinds YouTube" href="" target="_blank">
+                                                aria-label="Visit TrendyMinds YouTube" href=""
+                                                target="_blank">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                     class="h-6">
                                                     <path fill="currentColor"
@@ -389,17 +393,20 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5">
-                <form class="space-y-4" action="#">
-
+                <form class="space-y-4" action="{{ route('user.storeskill') }}" method="POST">
+@csrf
                     <div>
                         <label for="email"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Skill name</label>
-                        <input type="text" name="name" id="name"
+                        <input type="text" name="name" id="name" value="{{ old('name') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="" required>
+                            placeholder="">
+                            <div>
+                                @error('name')
+                                    <p class="text-sm text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
                     </div>
-
-
                     <button type="submit"
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
 
@@ -410,54 +417,130 @@
 </div>
 {{-- for experience --}}
 
-  <!-- Main modal -->
-  <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative p-4 w-full max-w-md max-h-full">
-          <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <!-- Modal header -->
-              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
-                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                      </svg>
-                      <span class="sr-only">Close modal</span>
-                  </button>
-              </div>
-              <!-- Modal body -->
-              <form class="p-4 md:p-5" action="{{ route("storeexperience") }}" method="post">
+<!-- Main modal -->
+<div id="crud-modal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-toggle="crud-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form class="p-4 md:p-5" action="{{ route('user.storeexperience') }}" method="post">
                 @csrf
-                  <div class="grid gap-4 mb-4 grid-cols-2">
-                      <div class="col-span-2">
-                          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Post</label>
-                          <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type post name" >
-                          <div>
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2">
+                        <label for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Post</label>
+                        <input type="text" name="title" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Type post name">
+                        <div>
                             @error('title')
-                            <p>{{ $message }}</p>
-                                
+                                <p class="text-sm text-red-500">{{ $message }}</p>
                             @enderror
-                          </div>
                         </div>
-                     
-                      <div class="col-span-2 sm:col-span-1">
-                          <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                          <input type="text" name="company" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type company name" >
-                      </div>
-                      <div class="col-span-2 sm:col-span-1">
-                        <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Periode</label>
-                        <input type="text" name="periode" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type company name">
                     </div>
-                      <div class="col-span-2">
-                          <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Description</label>
-                          <textarea  name="desc" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description here"></textarea>                    
-                      </div>
-                  </div>
-                  <button type="submit" name="" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                      <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                      Add new Experience
-                  </button>
-              </form>
-          </div>
-      </div>
-  </div> 
-  
+
+                    <div class="col-span-2 sm:col-span-2">
+                        <label for="company"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
+                        <input type="text" name="company" id="company" value="{{ old('company') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Type company name">
+                            <div>
+                                @error('company')
+                                    <p class="text-sm text-red-500">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        </div>
+                    <div class="w-full">
+                        <label for="start"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start
+                            date</label>
+                        <input type="date" name="start_date" id="start" value="{{ old('start_date') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="">
+                        <div>
+                            @error('start_date')
+                                <p class="text-sm text-red-500">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+
+                    </div>
+                    <div class="w-full">
+                        <label for="end" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End
+                            date
+                        </label>
+                        <input type="date" name="end_date" id="end" value="{{ old('end_date') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="">
+                        <div>
+                            @error('end_date')
+                                <p class="text-sm text-red-500">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Description</label>
+                        <textarea name="desc" id="description" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Write description here">{{ old('desc') }}</textarea>
+                            <div>
+                                @error('desc')
+                                    <p class="text-sm text-red-500">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                    </div>
+                </div>
+                <button type="submit" name=""
+                    class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    Add new Experience
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+ @if ($errors->any())
+    <script>
+        $(document).ready(function() {
+            $('#authentication-modal').show('show');
+        });
+    </script>
+@endif
+{{-- @if ($errors->any())
+    <script>
+        $(document).ready(function() {
+            $('#crud-modal').show();
+        });
+    </script>
+@endif --}}

@@ -64,7 +64,7 @@
                                     <div class="md:col-span-1">
                                         <label for="address">Address</label>
                                         <input type="text" name="adresse" id="address"
-                                            class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('address') }}"
+                                            class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('addresse') }}"
                                             placeholder="Enter your address" />
                                             @error('address')
                                             <div class="text-sm text-red-500">{{ $message }}</div>
@@ -88,15 +88,6 @@
                                             <div class="text-sm text-red-500">{{ $message }}</div>
                                         @enderror
                                     </div>
-
-                                    {{-- <div class="md:col-span-2">
-                                        <label for="city">City</label>
-                                        <input type="text" name="city" id="city"
-                                            class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                            placeholder="" />
-                                    </div> --}}
-
-
                                     <div class="md:col-span-1 text-left">
                                         <div class="inline-flex items-end">
                                             <button

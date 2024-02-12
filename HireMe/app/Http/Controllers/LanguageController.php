@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ExperienceRequest;
-use App\Models\Experience;
-use App\Models\User;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class ExperienceController extends Controller
+class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +26,7 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.langue');
     }
 
     /**
@@ -37,15 +35,20 @@ class ExperienceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ExperienceRequest $request)
-    {
-    $cv = Auth::user()->jobseeker->cv;    
-     $experience=$request->validated();
-     $experience['cv_id']=$cv->id;
-        Experience::create($experience);
-        return redirect()->route('user.show')->with('success', 'Experience created successfully.');
+    public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'name' => ['required', 'max:255'],
+        'level' => ['required', 'max:255'],
 
-    }
+    ]);
+  
+    $language = Language::firstOrCreate(['name' => $validatedData['name']],['level' => $validatedData['level']]);
+    $jobseeker = Auth::user()->jobseeker;
+    $cv = $jobseeker->cv;
+    $cv->langues()->syncWithoutDetaching([$language->id]);
+    return redirect()->route('user.show')->with('success', 'Language added successfully.');
+}
 
     /**
      * Display the specified resource.
@@ -53,9 +56,9 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-      
+        //
     }
 
     /**

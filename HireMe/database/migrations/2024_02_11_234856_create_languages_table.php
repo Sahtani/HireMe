@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\JobOffer;
-use App\Models\Skill;
+use App\Models\Cv;
+use App\Models\Language;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,17 +15,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('skills', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('level');
             $table->timestamps();
         });
-        Schema::create('job_offer_skill', function (Blueprint $table){
+        Schema::create('cv_language', function (Blueprint $table){
             $table->id();
-            $table->foreignIdFor(JobOffer::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Skill::class)->constrained()->cascadeOnDelete();
-            
-
+            $table->foreignIdFor(Cv::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Language::class)->constrained()->cascadeOnDelete();
         });
     }
 
@@ -36,7 +35,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_offer_skill');
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('cv_language');
+        Schema::dropIfExists('languages');
     }
 };

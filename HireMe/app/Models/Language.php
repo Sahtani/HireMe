@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-
-use App\Models\Cv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Competence extends Model
+class Language extends Model
 {
     use HasFactory;
-    protected $fillable=['name'];
+    protected $fillable=['name','level'];
     public function cvs(){
         return $this->belongsToMany(Cv::class);
+        
     }
 }

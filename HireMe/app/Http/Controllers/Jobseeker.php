@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRequest;
+use App\Models\Cv;
 use App\Models\Jobseeker as ModelsJobseeker;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -39,7 +40,9 @@ class Jobseeker extends Controller
      */
     
         public function store(CreateRequest $request)
-        {
+        { 
+            
+   
             $Jobseeker = $request->validated();
     
             // Handle image upload
@@ -55,6 +58,9 @@ class Jobseeker extends Controller
             $Jobseeker['user_id']=Auth::id();
 
             $Jobseeker = ModelsJobseeker::create($Jobseeker);
+            $cv=Cv::create(['jobseeker_id'=>$Jobseeker->id
+
+            ]);
         
             return redirect()->route('user.show');
             // return view('user.dashbord');
@@ -71,9 +77,17 @@ class Jobseeker extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {  
-        $jobseeker = ModelsJobseeker::where('user_id', Auth::id())->first();
-        return view('user/dashbord', ['jobseeker' => $jobseeker, 'user' => Auth::user()]);
+  
+    { 
+        
+        $jobseeker = Auth::user()->jobseeker;
+        
+        $exs=$jobseeker->cv->experiences;
+        $cursus=$jobseeker->cv->cursus;
+        $skills=$jobseeker->cv->skills;
+        $langues=$jobseeker->cv->langues;
+
+        return view('user/dashbord', ['jobseeker' => $jobseeker, 'user' => Auth::user(),'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
     }
 // }
 //         $jobseeker = ModelsJobseeker::where('user_id', Auth::id())->first();

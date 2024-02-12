@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use Illuminate\Http\Request;
-use Mpociot\Skills\Skill;
+use Illuminate\Support\Facades\Auth;
 
 class SkillController extends Controller
 {
@@ -13,15 +14,12 @@ class SkillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+
 
     public function index()
     {
-        $skills = Skill::pluck('name', 'id');
-    
-        return view('your-view', compact('skills'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +28,6 @@ class SkillController extends Controller
      */
     public function create()
     {
-    
     }
 
     /**
@@ -40,9 +37,16 @@ class SkillController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $validatedData = $request->validate([
+        'name' => ['required', 'max:255'],
+    ]);
+    $skill = Skill::firstOrCreate(['name' => $validatedData['name']]);
+    $jobseeker = Auth::user()->jobseeker;
+    $cv = $jobseeker->cv;
+    $cv->skills()->syncWithoutDetaching([$skill->id]);
+    return redirect()->route('user.show')->with('success', 'Skill added successfully.');
+}
 
     /**
      * Display the specified resource.

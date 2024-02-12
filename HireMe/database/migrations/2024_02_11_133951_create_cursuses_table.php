@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Cv;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('langues', function (Blueprint $table) {
+        Schema::create('cursuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('level');
+            $table->string('diplome');
+            $table->string('etablissement');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->foreignIdFor(Cv::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('langues');
+        Schema::dropIfExists('cursuses');
     }
 };

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ExperienceRequest;
-use App\Models\Experience;
-use App\Models\User;
+use App\Http\Requests\CursusRequest;
+use App\Models\Cursus;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class ExperienceController extends Controller
+class CursusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +27,7 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        //
+       return view("user.cursus");
     }
 
     /**
@@ -37,14 +36,13 @@ class ExperienceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ExperienceRequest $request)
+    public function store(CursusRequest $request)
     {
-    $cv = Auth::user()->jobseeker->cv;    
-     $experience=$request->validated();
-     $experience['cv_id']=$cv->id;
-        Experience::create($experience);
-        return redirect()->route('user.show')->with('success', 'Experience created successfully.');
-
+       $cv=Auth::user()->jobseeker->cv;
+       $cursus=$request->validated();
+       $cursus['cv_id']=$cv->id;
+       Cursus::create($cursus);
+       return redirect()->route('user.show')->with('success', 'Formation created successfully.');
     }
 
     /**
@@ -53,9 +51,9 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-      
+        //
     }
 
     /**

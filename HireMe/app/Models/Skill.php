@@ -9,4 +9,7 @@ class Skill extends Model
 {
     use HasFactory;
     protected $fillable=['name'];
+    public function cvs(){
+        return $this->belongsToMany(Cv::class);
+    }
 }
