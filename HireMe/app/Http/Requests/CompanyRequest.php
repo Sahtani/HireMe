@@ -24,7 +24,7 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|max:2048', // Image file validation, max size: 2MB
+            'image' => 'required', // Image file validation, max size: 2MB
          
             'industry' => 'required|string|min:4|max:255',
             'phone' => 'required|string|max:255',

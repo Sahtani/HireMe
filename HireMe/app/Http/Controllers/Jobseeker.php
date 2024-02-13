@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\CreateRequest;
 use App\Models\Cv;
 use App\Models\Jobseeker as ModelsJobseeker;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\View;
 
 class Jobseeker extends Controller
 {
@@ -42,9 +44,7 @@ class Jobseeker extends Controller
         public function store(CreateRequest $request)
         { 
             
-   
             $Jobseeker = $request->validated();
-    
             // Handle image upload
             if (request()->hasFile('image')) {
                 $image = request()->file('image');
@@ -63,12 +63,7 @@ class Jobseeker extends Controller
             ]);
         
             return redirect()->route('user.show');
-            // return view('user.dashbord');
         }
-    
-            // return redirect()->route('user.', ['slug' => $post->slug, 'id' => $post->id])->with('success','article  été bien créer');
-        
-    
 
     /**
      * Display the specified resource.
@@ -87,22 +82,49 @@ class Jobseeker extends Controller
         $skills=$jobseeker->cv->skills;
         $langues=$jobseeker->cv->langues;
 
-        return view('user/dashbord', ['jobseeker' => $jobseeker, 'user' => Auth::user(),'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
+        return view('user/profile', ['jobseeker' => $jobseeker, 'user' => Auth::user(),'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
     }
-// }
-//         $jobseeker = ModelsJobseeker::where('user_id', Auth::id())->first();
-//         // $Jobseeker=ModelsJobseeker::find(Auth::user())->get();
-//        dd($jobseeker->email);
-//         // Pass jobseeker information to your view for display
-//         return view('user/dashbord', ['jobseeker' => $jobseeker]);
-   
+
+    public function showcv()
+  
+    { 
+        
+        $jobseeker = Auth::user()->jobseeker;
+        
+        // $exs=$jobseeker->cv->experiences;
+        // $cursus=$jobseeker->cv->cursus;
+        // $skills=$jobseeker->cv->skills;
+        // $langues=$jobseeker->cv->langues;
+
+        return view('user/cv', ['jobseeker' => $jobseeker, 'user' => Auth::user()]);
+        // ,'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
+    }
+ 
+
+
+
+    public function downloadCV()
+    {   $user= Auth::user();
+        $jobseeker = Auth::user()->jobseeker;
+        // $exs = $jobseeker->cv->experiences;
+        // $cursus = $jobseeker->cv->cursus;
+        // $skills = $jobseeker->cv->skills;
+        // $langues = $jobseeker->cv->langues;
+    
+        $pdf =  FacadePdf::loadView('user.cv', compact('jobseeker','user')); 
+        // ,'exs', 'cursus', 'skills', 'langues'));
+    
+        return $pdf->download('your_cv.pdf');
+    }
+    
+
     
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsed
      */
     public function edit($id)
     {

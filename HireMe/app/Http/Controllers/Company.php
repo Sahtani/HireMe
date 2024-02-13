@@ -19,7 +19,6 @@ class Company extends Controller
     public function index()
 
     {
-       
     }
 
     /**
@@ -39,23 +38,26 @@ class Company extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CompanyRequest $request)
-    { 
+    {
         $company = $request->validated();
 
         // Handle image upload
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads', 'public');
-            $company['image'] = $imagePath;
-
+        if (request()->hasFile('image')) {
+            $image = request()->file('image');
+            $filePath = $image->store('public/uploads');
+            $fileName = explode("/", $filePath);
+            $Jobseeker["image"] = $fileName[2];
+        } else {
+            $imageName = 'jobseeker.png';
         }
-        
-        $company['user_id']=Auth::id(); 
+
+        $company['user_id'] = Auth::id();
         // Store validated data
-       
+
         $company = ModelsCompany::create($company);
-       
-      
-        return redirect()->route('company.home');
+
+
+        return  redirect()->route('company.profile');
     }
 
     /**
@@ -64,9 +66,12 @@ class Company extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $user = Auth::user();
+        $company = Auth::user()->company;
+       
+        return view("company.profile", compact('company', 'user'));
     }
 
     /**

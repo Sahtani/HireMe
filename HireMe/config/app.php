@@ -195,6 +195,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -211,6 +212,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Skills' => Khrigo\SkillsList\SkillsListFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
     ])->toArray(),
+
 
 ];

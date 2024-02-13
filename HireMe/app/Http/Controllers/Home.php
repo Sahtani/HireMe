@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Jobseeker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,16 +16,22 @@ class Home extends Controller
      */
     public function index()
     {
-        if(Auth::id()){
-          $role=Auth()->user()->role;
-          if($role=='user'){
-             return redirect(route("user.create"));
-          }else if($role=='company'){
-            return redirect(route("company.create"));
-          }else if($role=='admin'){
-            return redirect('admin.dashboard');
-          }
-          
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            $userId = Auth::id();
+            if ($role == 'user') {
+                if (Jobseeker::where('user_id', $userId)->count() > 0) {
+                    return redirect()->route("user.show");
+                } else   return redirect(route("user.create"));
+            } else if ($role == 'company') {
+                if (Company::where('user_id', $userId)->count() > 0) {
+
+                    return view("company.profile");
+                    // return redirect()->route("company.show");
+                } else return redirect(route("company.create"));
+            } else if ($role == 'admin') {
+                return redirect('admin.dashboard');
+            }
         }
     }
 
