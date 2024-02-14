@@ -75,8 +75,7 @@ class Jobseeker extends Controller
   
     { 
         
-        $jobseeker = Auth::user()->jobseeker;
-        
+        $jobseeker = Auth::user()->jobseeker;  
         $exs=$jobseeker->cv->experiences;
         $cursus=$jobseeker->cv->cursus;
         $skills=$jobseeker->cv->skills;

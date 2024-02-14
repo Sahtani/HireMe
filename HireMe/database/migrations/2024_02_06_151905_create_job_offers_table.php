@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\JobOffer;
 use App\Models\Jobseeker;
 use Illuminate\Database\Migrations\Migration;
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->text('desc');
             $table->enum('type_contrat', ['remote', 'hybrid', 'full-time']);
             $table->string('location');
+            $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
         Schema::create('job_offer_jobseeker', function (Blueprint $table) {

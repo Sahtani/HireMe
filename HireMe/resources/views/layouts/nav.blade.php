@@ -48,7 +48,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-[sans-serif]">
 
     <nav class=" bg-white border-gray-200 shadow rounded ">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 shadow-b-2xl">
@@ -120,6 +120,13 @@
                             class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Home</a>
 
                     </li>
+                    @company
+                    <li>
+                        <a href="{{ route("offer.myoffer") }}" type="button"
+                            class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Our Job</a>
+
+                    </li>
+                    @endcompany
                    @guest
                    <li>
                     @if (Route::has('register'))

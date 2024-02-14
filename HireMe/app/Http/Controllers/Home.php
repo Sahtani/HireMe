@@ -25,9 +25,7 @@ class Home extends Controller
                 } else   return redirect(route("user.create"));
             } else if ($role == 'company') {
                 if (Company::where('user_id', $userId)->count() > 0) {
-
-                    return view("company.profile");
-                    // return redirect()->route("company.show");
+                    return redirect(route("company.profile"));
                 } else return redirect(route("company.create"));
             } else if ($role == 'admin') {
                 return redirect('admin.dashboard');

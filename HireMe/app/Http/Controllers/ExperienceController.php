@@ -39,12 +39,11 @@ class ExperienceController extends Controller
      */
     public function store(ExperienceRequest $request)
     {
-    $cv = Auth::user()->jobseeker->cv;    
-     $experience=$request->validated();
-     $experience['cv_id']=$cv->id;
+        $cv = Auth::user()->jobseeker->cv;
+        $experience = $request->validated();
+        $experience['cv_id'] = $cv->id;
         Experience::create($experience);
         return redirect()->route('user.show')->with('success', 'Experience created successfully.');
-
     }
 
     /**
@@ -55,7 +54,6 @@ class ExperienceController extends Controller
      */
     public function show()
     {
-      
     }
 
     /**

@@ -12,4 +12,8 @@ class Skill extends Model
     public function cvs(){
         return $this->belongsToMany(Cv::class);
     }
+    public function jobOffers()
+    {
+        return $this->belongsToMany(JobOffer::class);
+    }
 }

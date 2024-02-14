@@ -30,6 +30,7 @@ class Company extends Controller
     {
         return view('company.create');
     }
+ 
 
     /**
      * Store a newly created resource in storage.
@@ -46,9 +47,11 @@ class Company extends Controller
             $image = request()->file('image');
             $filePath = $image->store('public/uploads');
             $fileName = explode("/", $filePath);
-            $Jobseeker["image"] = $fileName[2];
+            
+            $company["image"] = $fileName[2];
+
         } else {
-            $imageName = 'jobseeker.png';
+            $imageName = 'company.png';
         }
 
         $company['user_id'] = Auth::id();
