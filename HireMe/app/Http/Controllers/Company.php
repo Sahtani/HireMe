@@ -87,9 +87,8 @@ class Company extends Controller
     {    
         $user = Auth::user();
         $company = $user->company;
-
         $jobApplications = $company->jobOffers()->with('jobSeekers')->get();
-        dd($jobApplications);
+        return view("company.application", compact('jobApplications','user'));
     }
 
 

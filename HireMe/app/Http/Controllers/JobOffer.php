@@ -96,6 +96,18 @@ class JobOffer extends Controller
     
         return redirect()->back()->with('success', 'Your application has been submitted successfully.');
     }
+    public function read($id)
+    {
+
+        $user = Auth::user();
+        $offer=ModelsJobOffer::findOrfail($id);
+        $skills=$offer->skills;
+        $company = $user->company;
+        $jobApplications = $company->jobOffers()->with('jobSeekers.user')->get();
+        
+ 
+        return view('offer.read',compact('offer','jobApplications','skills'));
+    }
     
 
 

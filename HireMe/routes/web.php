@@ -74,6 +74,7 @@ Route::middleware("auth")->group(function () {
         Route::delete('/detroy/{id}', [JobOffer::class, 'destroy'])->name('destroy');
         Route::get('/show', [JobOffer::class, 'show'])->name('show');
         Route::get('/apply/{id}', [JobOffer::class, 'apply'])->name('apply');
+        Route::get('/read/{id}', [JobOffer::class, 'read'])->name('read');
 
     });
     // Route::resource("company", Company::class);

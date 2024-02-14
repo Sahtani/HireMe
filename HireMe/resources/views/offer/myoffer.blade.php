@@ -28,7 +28,8 @@
                                     <li class="text-gray-800">{{ $skill->name }}</li>
                                 @endforeach
                             </ul>
-                            <div class="flex items-center justify-end ">
+                            <div class="flex items-center justify-between ">
+                                <a href="{{ route('offer.read',['id'=>$offer->id]) }}" class="text-blue-500 hover:underline">Read more</a>
                                 <form action="{{ route('offer.destroy',['id'=>$offer->id]) }}" method="POST"
                                     class="mt-4 inline-block text-blue-600 text-sm hover:underline">
                                     @method('DELETE')
