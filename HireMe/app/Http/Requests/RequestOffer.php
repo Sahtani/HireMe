@@ -24,7 +24,7 @@ class RequestOffer extends FormRequest
     public function rules()
     {
         return [
-            'company_name' => 'required|max:255',
+            // 'company_name' => 'required|max:255',
             'title' => 'required|max:255',
             'desc' => 'required',
             'type_contrat' => 'required|in:remote,hybrid,full-time',

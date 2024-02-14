@@ -17,4 +17,7 @@ class JobOffer extends Model
     {
         return $this->belongsToMany(Skill::class);
     }
+    public function jobSeekers(){
+        return $this->belongsToMany(Jobseeker::class);
+    }
 }

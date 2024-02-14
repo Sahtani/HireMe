@@ -7,7 +7,7 @@
         <div class="grid sm:grid-cols-2 gap-y-7 gap-x-12">
             <!-- Other input fields -->
             <!-- Company Name -->
-            <div>
+            {{-- <div>
                 <label class="text-sm mb-2 block">Company Name</label>
                 <input name="company_name" type="text" value="{{ old('company_name') }}"
                     class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500"
@@ -15,7 +15,7 @@
                 @error('company_name')
                 <div class="text-sm text-red-500">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
 
             <!-- Title -->
             <div>
@@ -70,10 +70,17 @@
                 <label class="text-sm mb-2 block">Skills</label>
                 <div id="skills-container">
                     <div>
-                        <input name="skills[]" type="text"
+                        <input name="skills[]" type="text" 
                             class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-blue-500"
                             placeholder="Enter skill" />
+                             @if ($errors->has('skills'))
+                        @foreach ($errors->get('skills') as $error)
+                            <div class="text-sm text-red-500">{{ $error }}</div>
+                        @endforeach
+                    @endif
+                    
                         <button type="button" class="remove-skill">Remove</button>
+                       
                     </div>
                 </div>
                 <button type="button" id="add-skill">Add Skill</button>

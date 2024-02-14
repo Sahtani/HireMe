@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\CreateRequest;
 use App\Models\Company as ModelsCompany;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,7 +77,14 @@ class Company extends Controller
        
         return view("company.profile", compact('company', 'user'));
     }
-
+        public function all()
+        {
+            $companies = User::with('company')->get();
+ 
+        
+            return view("company.companies", compact('companies'));
+        }
+    
     /**
      * Show the form for editing the specified resource.
      *

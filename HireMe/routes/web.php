@@ -59,6 +59,7 @@ Route::middleware("auth")->group(function () {
         Route::get('/create', [Company::class, 'create'])->name('create');
 
         Route::post('/store', [Company::class, 'store'])->name("store");
+        Route::get('/all', [Company::class, 'all'])->name("all");
     });
 
 
@@ -69,6 +70,10 @@ Route::middleware("auth")->group(function () {
         Route::get('/myoffer', [JobOffer::class, 'Myoffer'])->name('myoffer');
         Route::get('/create', [JobOffer::class, 'create'])->name('create');
         Route::post('/store', [JobOffer::class, 'store'])->name('store');
+        Route::delete('/detroy/{id}', [JobOffer::class, 'destroy'])->name('destroy');
+        Route::get('/show', [JobOffer::class, 'show'])->name('show');
+        Route::get('/apply/{id}', [JobOffer::class, 'apply'])->name('apply');
+
     });
     // Route::resource("company", Company::class);
     Route::get('/dashboard', function () {

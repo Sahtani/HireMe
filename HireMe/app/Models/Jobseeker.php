@@ -17,4 +17,7 @@ class Jobseeker extends User
     public function cv(){
         return $this->hasOne(Cv::class);
     }
+    public function jobOffers(){
+        return $this->belongsToMany(JobOffer::class);
+    }
 }

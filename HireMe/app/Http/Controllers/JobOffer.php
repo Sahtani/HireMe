@@ -8,6 +8,7 @@ use App\Http\Requests\RequestOffer;
 use App\Models\JobOffer as ModelsJobOffer;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Jobs\JobName;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -49,12 +50,12 @@ class JobOffer extends Controller
      */
     public function store(RequestOffer $request)
     {
-        $company = Auth::user()->company;
         
-       
+        $user = Auth::user();
+        $company = Auth::user()->company;
         $validatedData = $request->validated();
         $skills = Arr::pull($validatedData, 'skills');
-   
+        $validatedData['company_name'] =$user->name;
         $validatedData['company_id'] = $company->id;
         
         $jobOffer = ModelsJobOffer::create($validatedData);
@@ -75,10 +76,28 @@ class JobOffer extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $offers=ModelsJobOffer::all();
+        return view('offer.offers',compact('offers'));
     }
+    public function apply(Request $request, $offerId)
+    {
+        $jobSeeker = auth()->user()->jobSeeker;
+    
+        $jobOffer = ModelsJobOffer::findOrFail($offerId);
+        $alreadyApplied = $jobSeeker->jobOffers()->where('job_offer_id', $jobOffer->id)->exists();
+    
+        if ($alreadyApplied) {
+            return redirect()->back()->with('error', 'Vous avez déjà postulé à cette offre d\'emploi.');
+        }
+    
+        $jobSeeker->jobOffers()->attach($jobOffer);
+    
+        return redirect()->back()->with('success', 'Votre candidature a été soumise avec succès.');
+    }
+    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -111,6 +130,8 @@ class JobOffer extends Controller
      */
     public function destroy($id)
     {
-        //
+        $offer=ModelsJobOffer::findOrfail($id);
+       $offer->delete();
+       return redirect()->route('offer.myoffer');
     }
 }

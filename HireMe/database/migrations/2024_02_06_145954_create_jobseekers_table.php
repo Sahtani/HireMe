@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('industry')->nullable();
             $table->string('adresse')->nullable();
             $table->string('phone')->nullable();
-            $table->string('about')->nullable();
+            $table->text('about')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });
