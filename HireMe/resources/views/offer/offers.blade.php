@@ -2,7 +2,7 @@
 
 @section('content')
     @if (session('error'))
-        <div class="flex items-center w-1/2  p-4 ml-12 mt-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        {{-- <div class="flex items-center w-1/2  p-4 ml-12 mt-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
             role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
@@ -11,9 +11,14 @@
             </svg>
             <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">{{ session('error') }}</span>
+                <span class="font-medium"></span>
             </div>
-        </div>
+        </div> --}}
+        @extends('layouts.alert')
+
+@section('alert')
+{{ session('error') }}
+@endsection
     @endif
 
     @if (session('success'))

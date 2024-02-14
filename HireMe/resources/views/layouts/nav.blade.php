@@ -125,6 +125,12 @@
                             class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">My Jobs</a>
 
                     </li>
+                    <li>
+                        <a href="{{ route("company.viewApplications") }}" type="button"
+                            class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Application</a>
+
+                    </li>
+                    
                     @endcompany
                     @user
                     <li>
@@ -134,7 +140,7 @@
                     </li>
                     <li>
                         <a href="{{ route("company.all") }}" type="button"
-                            class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Jobs</a>
+                            class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Companies</a>
 
                     </li>
                     @enduser

@@ -31,7 +31,7 @@ class Company extends Controller
     {
         return view('company.create');
     }
- 
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,9 +48,8 @@ class Company extends Controller
             $image = request()->file('image');
             $filePath = $image->store('public/uploads');
             $fileName = explode("/", $filePath);
-            
-            $company["image"] = $fileName[2];
 
+            $company["image"] = $fileName[2];
         } else {
             $imageName = 'company.png';
         }
@@ -74,17 +73,27 @@ class Company extends Controller
     {
         $user = Auth::user();
         $company = Auth::user()->company;
-       
+
         return view("company.profile", compact('company', 'user'));
     }
-        public function all()
-        {
-            $companies = User::with('company')->get();
- 
-        
-            return view("company.companies", compact('companies'));
-        }
-    
+    public function all()
+    {
+        $companies = User::where('role', 'company')->get();
+
+
+        return view("company.companies", compact('companies'));
+    }
+    public function viewApplications()
+    {    
+        $user = Auth::user();
+        $company = $user->company;
+
+        $jobApplications = $company->jobOffers()->with('jobSeekers')->get();
+        dd($jobApplications);
+    }
+
+
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -60,6 +60,7 @@ Route::middleware("auth")->group(function () {
 
         Route::post('/store', [Company::class, 'store'])->name("store");
         Route::get('/all', [Company::class, 'all'])->name("all");
+        Route::get('/viewApplications', [Company::class, 'viewApplications'])->name("viewApplications");
     });
 
 

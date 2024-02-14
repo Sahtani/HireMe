@@ -89,12 +89,12 @@ class JobOffer extends Controller
         $alreadyApplied = $jobSeeker->jobOffers()->where('job_offer_id', $jobOffer->id)->exists();
     
         if ($alreadyApplied) {
-            return redirect()->back()->with('error', 'Vous avez déjà postulé à cette offre d\'emploi.');
+            return redirect()->back()->with('error', 'You have already applied for this job offer.');
         }
     
         $jobSeeker->jobOffers()->attach($jobOffer);
     
-        return redirect()->back()->with('success', 'Votre candidature a été soumise avec succès.');
+        return redirect()->back()->with('success', 'Your application has been submitted successfully.');
     }
     
 
