@@ -2,7 +2,7 @@
 
 @section('content')
     @if (session('error'))
-        {{-- <div class="flex items-center w-1/2  p-4 ml-12 mt-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        <div class="flex items-center w-1/2  p-4 ml-12 mt-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
             role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
@@ -13,13 +13,13 @@
             <div>
                 <span class="font-medium"></span>
             </div>
-        </div> --}}
-        @extends('layouts.alert')
+        </div> 
+        {{-- @extends('layouts.alert')
 
 @section('alert')
 {{ session('error') }}
-@endsection
-    @endif
+@endsection--}} 
+    @endif 
 
     @if (session('success'))
         <div class="flex items-center p-4 w-1/2  p-4 ml-12 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
@@ -35,7 +35,28 @@
             </div>
         </div>
     @endif
-
+    <div class="flex items-center justify-center mt-8">
+        <div class="relative hidden md:block">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+              <span class="sr-only">Search icon</span>
+          </div>
+          <div class="w-80">
+              <form class="searchForm">
+                  <input type="text" id="search" name="search"
+                      class="block w-full py-3 px-10 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:placeholder-gray-400 text-mr focus:!outline-none focus:!border-none focus:!ring-0 focus:!shadow-none "
+                      placeholder="Search...">
+                      <div>
+                        <button type="submit">Rechercher</button>
+                    </div>
+              </form>
+          </div>
+      
+      </div>
     <div class="font-[sans-serif] p-4">
         <div class=" max-md:max-w-lg mx-10 mt-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
@@ -89,3 +110,22 @@
         </div>
     </div>
 @endsection
+<div id="searchResults"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchForm').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: '{{ route("offer.search") }}',
+                type: 'GET',
+                data: formData,
+                success: function(response) {
+                    $('#searchResults').html(response);
+                }
+            });
+        });
+    });
+</script>

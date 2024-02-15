@@ -1,7 +1,10 @@
 @extends('layouts.nav')
 
 @section('content')
-    <div class="bg-white font-[sans-serif]">
+
+</div>
+
+    <div class=" font-[sans-serif]">
         <div class="max-w-7xl mx-auto">
             <div class="text-center">
                 <h2

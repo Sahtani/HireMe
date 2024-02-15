@@ -75,7 +75,7 @@ Route::middleware("auth")->group(function () {
         Route::get('/show', [JobOffer::class, 'show'])->name('show');
         Route::get('/apply/{id}', [JobOffer::class, 'apply'])->name('apply');
         Route::get('/read/{id}', [JobOffer::class, 'read'])->name('read');
-
+        Route::get('/job/search', [JobOffer::class, 'search'])->name('search');
     });
     // Route::resource("company", Company::class);
     Route::get('/dashboard', function () {

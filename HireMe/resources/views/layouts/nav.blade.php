@@ -78,8 +78,8 @@
                         <span class="sr-only">Search icon</span>
                     </div>
                     <div class="w-80">
-                        <form class="search-form">
-                            <input type="text" id="search-field"
+                        <form class="searchForm">
+                            <input type="text" id="search" name="search"
                                 class="block w-full py-3 px-10 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:placeholder-gray-400 text-mr focus:!outline-none focus:!border-none focus:!ring-0 focus:!shadow-none "
                                 placeholder="Search...">
                         </form>
