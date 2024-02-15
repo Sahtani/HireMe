@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\SkillController;
 use App\Http\Requests\RequestOffer;
 use Illuminate\Support\Facades\View;
+
 use App\Models\JobOffer as ModelsJobOffer;
 use App\Models\Skill;
 use Illuminate\Http\Request;
@@ -78,8 +79,8 @@ class JobOffer extends Controller
      */
     public function show()
     {
-        $offers=ModelsJobOffer::all();
-        return view('offer.offers',compact('offers'));
+        // $offers=ModelsJobOffer::all();
+        return view('offer.offers');
     }
     public function apply(Request $request, $offerId)
     {
@@ -89,7 +90,7 @@ class JobOffer extends Controller
         $alreadyApplied = $jobSeeker->jobOffers()->where('job_offer_id', $jobOffer->id)->exists();
     
         if ($alreadyApplied) {
-            return redirect()->back()->with('error', 'You have already applied for this job offer.');
+            return redirect()->back()->with('error', 'You have already applied for this job offer.');   
         }
     
         $jobSeeker->jobOffers()->attach($jobOffer);
@@ -108,23 +109,7 @@ class JobOffer extends Controller
  
         return view('offer.read',compact('offer','jobApplications','skills'));
     }
-    public function search(Request $request)
-{
-    $search = $request->input('search');
-
-    $jobOffers = ModelsJobOffer::where('title', 'like', '%' . $search . '%')
-        ->orWhere('skills', 'like', '%' . $search . '%')
-        ->orWhere('contract_type', 'like', '%' . $search . '%')
-        ->orWhere('location', 'like', '%' . $search . '%')
-        ->get();
-
-    $view = View::make('layouts.job-offers', compact('jobOffers'))->render();
-
-    return response()->json(['html' => $view]);
-}
-    
-
-
+   
     /**
      * Show the form for editing the specified resource.
      *

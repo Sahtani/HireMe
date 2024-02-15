@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Company;
 use App\Http\Controllers\CursusController;
-
+use App\Http\Controllers\CvController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\JobOffer;
@@ -35,8 +35,9 @@ Route::middleware("auth")->group(function () {
         Route::get('/create', [ControllersJobseeker::class, 'create'])->name('create');
         Route::post('/store', [ControllersJobseeker::class, 'store'])->name("store");
         Route::get('/show', [ControllersJobseeker::class, 'show'])->name('show');
+        // cv
         Route::get('/showcv', [ControllersJobseeker::class, 'showcv'])->name('showcv');
-        Route::get('/download', [ControllersJobseeker::class, 'downloadCV'])->name('user.download');
+        Route::get('/download', [CvController::class, 'downloadCV'])->name('download');
 
         // experiencs
         Route::get('/newexperience', [ExperienceController::class, 'create'])->name('createexperience');
@@ -75,7 +76,7 @@ Route::middleware("auth")->group(function () {
         Route::get('/show', [JobOffer::class, 'show'])->name('show');
         Route::get('/apply/{id}', [JobOffer::class, 'apply'])->name('apply');
         Route::get('/read/{id}', [JobOffer::class, 'read'])->name('read');
-        Route::get('/job/search', [JobOffer::class, 'search'])->name('search');
+        Route::get('/search', [JobOffer::class, 'search'])->name('search');
     });
     // Route::resource("company", Company::class);
     Route::get('/dashboard', function () {

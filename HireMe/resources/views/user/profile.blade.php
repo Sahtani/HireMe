@@ -29,7 +29,8 @@
                                                 <p class="text-gray-700">{{ $jobseeker->adresse }}</p>
                                             </div>
                                         </div>
-                                        <a href="{{ route('user.showcv') }}"> download cv</a>
+                                        <a href="{{ route('user.showcv') }}"> view cv</a><br>
+                                        <a href="{{ route('user.download') }}"> download cv</a>
                                         <div class="mt-6 flex flex-col gap-4 ">
                                             <h1 class="text-xl font-bold">Contact</h1>
                                             <div class="flex gap-1">

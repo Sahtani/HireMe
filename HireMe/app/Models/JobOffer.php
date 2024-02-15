@@ -20,4 +20,10 @@ class JobOffer extends Model
     public function jobSeekers(){
         return $this->belongsToMany(Jobseeker::class);
     }
+
+    // public function scopeSearch($query, $field ,$search) {
+    //     $offers = $query->where($field, "like", "%$search%");
+    //     // dd($offers);
+    //     return $offers;
+    // }
 }

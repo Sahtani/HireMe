@@ -9,9 +9,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
 
-<!-- component -->
-<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- component -->
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -46,14 +47,15 @@
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
-
+    @livewireStyles
+</head>
 <body class="bg-gray-100 font-[sans-serif]">
 
     <nav class=" bg-white border-gray-200 shadow rounded ">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 shadow-b-2xl">
             <div>
-                <a href="{{ route("home") }}">
-                    <img src="{{ asset("image/logo.png") }}" class="w-24 h-15 cursor-pointer"/>
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('image/logo.png') }}" class="w-24 h-15 cursor-pointer"/>
                 </a> 
             </div>
             <!-- search  -->
@@ -80,7 +82,7 @@
                     <div class="w-80">
                         <form class="searchForm">
                             <input type="text" id="search" name="search"
-                                class="block w-full py-3 px-10 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:placeholder-gray-400 text-mr focus:!outline-none focus:!border-none focus:!ring-0 focus:!shadow-none "
+                                class="block w-full py-2 px-10 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:placeholder-gray-400 text-mr focus:!outline-none focus:!border-none focus:!ring-0 focus:!shadow-none "
                                 placeholder="Search...">
                         </form>
                     </div>
@@ -121,12 +123,12 @@
                     </li>
                     @company
                     <li>
-                        <a href="{{ route("offer.myoffer") }}" type="button"
+                        <a href="{{ route('offer.myoffer') }}" type="button"
                             class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">My Jobs</a>
 
                     </li>
                     <li>
-                        <a href="{{ route("company.viewApplications") }}" type="button"
+                        <a href="{{ route('company.viewApplications') }}" type="button"
                             class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Application</a>
 
                     </li>
@@ -134,12 +136,12 @@
                     @endcompany
                     @user
                     <li>
-                        <a href="{{ route("offer.show") }}" type="button"
+                        <a href="{{ route('offer.show') }}" type="button"
                             class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Jobs</a>
 
                     </li>
                     <li>
-                        <a href="{{ route("company.all") }}" type="button"
+                        <a href="{{ route('company.all') }}" type="button"
                             class="text-bleuc font-bold  hover:bg-bleu hover:text-bleuc font-serif  focus:outline-none   rounded-full text-sm px-6 py-2.5 text-center">Companies</a>
 
                     </li>
@@ -149,39 +151,42 @@
                     @if (Route::has('register'))
                    <a href="{{ route('register') }}" type="button"
                        class="text-bleuc md:bg-bleu font-serif hover:text-white hover:bg-bleuc  focus:outline-none  font-bold rounded-full text-sm px-5 py-2 text-center">Sign
-                       Up</a>
-                       @endif
+                       Up</a> @endif
                </li>
                <li>
-                   <a href="{{ route('login') }}" type="button"
-                       class="text-bleuc font-bold md:bg-bleu  hover:bg-bleuc hover:text-white font-serif  focus:outline-none   rounded-full text-sm px-6 py-2 text-center">Log
-                       In</a>
+                   <a href="{{ route('login') }}"
+        type="button"
+        class="text-bleuc font-bold md:bg-bleu  hover:bg-bleuc hover:text-white font-serif  focus:outline-none   rounded-full text-sm px-6 py-2 text-center">
+    Log
+    In</a>
 
-               </li> 
-                   @endguest
-                   
-                    @auth
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}" class="text-bleuc md:bg-bleu font-serif hover:text-white hover:bg-bleu focus:outline-none  font-bold rounded-full text-sm px-5 text-center">
-                                @csrf
-        
-                                <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
+    </li>
+@endguest
+
+@auth
+    <li>
+        <form method="POST" action="{{ route('logout') }}"
+            class="text-bleuc md:bg-bleu font-serif hover:text-white hover:bg-bleu focus:outline-none  font-bold rounded-full text-sm px-5 text-center">
+            @csrf
+
+            <x-dropdown-link :href="route('logout')"
+                onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                    </li> 
-                  
-                    @endauth
-                   
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <section>
-        @yield('content')
-    </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+                {{ __('Log Out') }}
+            </x-dropdown-link>
+        </form>
+    </li>
+
+@endauth
+
+</ul>
+</div>
+</div>
+</nav>
+<section>
+    @yield('content')
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+@livewireScripts
 </body>
 <html

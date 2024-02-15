@@ -5,7 +5,6 @@ use App\Http\Requests\CreateRequest;
 use App\Models\Cv;
 use App\Models\Jobseeker as ModelsJobseeker;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -84,37 +83,24 @@ class Jobseeker extends Controller
         return view('user/profile', ['jobseeker' => $jobseeker, 'user' => Auth::user(),'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
     }
 
-    public function showcv()
-  
+    public function showcv() 
     { 
         
         $jobseeker = Auth::user()->jobseeker;
         
-        // $exs=$jobseeker->cv->experiences;
-        // $cursus=$jobseeker->cv->cursus;
-        // $skills=$jobseeker->cv->skills;
-        // $langues=$jobseeker->cv->langues;
+        $exs=$jobseeker->cv->experiences;
+        $cursus=$jobseeker->cv->cursus;
+        $skills=$jobseeker->cv->skills;
+        $langues=$jobseeker->cv->langues;
 
-        return view('user/cv', ['jobseeker' => $jobseeker, 'user' => Auth::user()]);
-        // ,'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
+        return view('user/cv', ['jobseeker' => $jobseeker, 'user' => Auth::user(),
+        'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
     }
  
 
 
 
-    public function downloadCV()
-    {   $user= Auth::user();
-        $jobseeker = Auth::user()->jobseeker;
-        // $exs = $jobseeker->cv->experiences;
-        // $cursus = $jobseeker->cv->cursus;
-        // $skills = $jobseeker->cv->skills;
-        // $langues = $jobseeker->cv->langues;
-    
-        $pdf =  FacadePdf::loadView('user.cv', compact('jobseeker','user')); 
-        // ,'exs', 'cursus', 'skills', 'langues'));
-    
-        return $pdf->download('your_cv.pdf');
-    }
+ 
     
 
     
