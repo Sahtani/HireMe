@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -12,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -43,17 +46,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-// for company
-    public function company(){
+    // for company
+    public function company()
+    {
         return $this->hasOne(Company::class);
     }
     // for jobseeker
-    public function jobseeker(){
+    public function jobseeker()
+    {
         return $this->hasOne(jobSeeker::class);
     }
-    public function admin(){
+    public function admin()
+    {
         return $this->hasOne(Admin::class);
     }
-
-
 }

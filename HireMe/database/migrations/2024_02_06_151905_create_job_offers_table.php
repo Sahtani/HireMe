@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('location');
             $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
+        $table->softDeletes();
         });
         Schema::create('job_offer_jobseeker', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -45,6 +46,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_offers');
+        Schema::table('job_offers', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

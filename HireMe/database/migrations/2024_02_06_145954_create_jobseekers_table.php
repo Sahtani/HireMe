@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('about')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -35,6 +36,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobseekers');
+        Schema::table('jobseekers', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

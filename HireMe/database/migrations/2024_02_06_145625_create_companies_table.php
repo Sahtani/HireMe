@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone');
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -33,6 +34,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::table('companies', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

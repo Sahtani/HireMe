@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\Company;
 use App\Http\Controllers\CursusController;
 use App\Http\Controllers\CvController;
@@ -91,7 +92,13 @@ Route::middleware("auth")->group(function () {
 });
 
 
-// route of jobseeker
+// route of admin
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [Home::class, 'index'])->name('index');
+    Route::get('/dashboard', [Admin::class, 'index'])->name('index');
+    Route::get('/company', [Admin::class, 'allCompanies'])->name('company');
+    Route::get('/offers', [Admin::class, 'allJoboffers'])->name('offers');
+});
 
 
 

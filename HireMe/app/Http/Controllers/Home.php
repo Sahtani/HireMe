@@ -28,7 +28,7 @@ class Home extends Controller
                     return redirect(route("company.profile"));
                 } else return redirect(route("company.create"));
             } else if ($role == 'admin') {
-                return redirect('admin.dashboard');
+                return redirect(route('admin.index'));
             }
         }
     }

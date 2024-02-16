@@ -96,7 +96,7 @@ class Jobseeker extends Controller
         return view('user/cv', ['jobseeker' => $jobseeker, 'user' => Auth::user(),
         'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
     }
- 
+   
 
 
 
