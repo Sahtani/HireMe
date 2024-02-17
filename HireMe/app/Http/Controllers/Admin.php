@@ -10,21 +10,47 @@ use Illuminate\Http\Request;
 
 class Admin extends Controller
 {
-    public function index()
-    {
-        $jobseekers = Jobseeker::count();
-        $companies = Company::count();
-        $jobOffers = JobOffer::count();
-        $all=Jobseeker::with('user')->get();
-        return view('admin.dashboard', compact('jobseekers', 'companies', 'jobOffers','all'));
-    }
 
-    public function allCompanies(){
-        $companies=Company::with('company')->get();
-        return view('admin.company',compact('companies'));
+
+
+        private function getAlljobseeker()
+        {
+            return   Jobseeker::withTrashed()->count();
+        }
+        private function getAllcompany()
+        {
+            return   Company::withTrashed()->count();
+        }
+        private function getAlljoboffer()
+        {
+            return JobOffer::withTrashed()->count();
+        }
+        public function index()
+        {
+            $jobseekers = $this->getAlljobseeker();
+            $companies = $this->getAllcompany();
+            $jobOffers = $this->getAlljoboffer();
+
+            $all = Jobseeker::with('user')->withTrashed()->get();
+            return view('admin.dashboard', compact('jobseekers', 'companies', 'jobOffers', 'all'));
+        }
+
+    public function allCompanies()
+    {
+        $jobseekers = $this->getAlljobseeker();
+        $companies = $this->getAllcompany();
+        $jobOffers = $this->getAlljoboffer();
+
+        $all_companies = Company::with('user')->withTrashed()->get();
+        return view('admin.company', compact('all_companies','jobseekers', 'companies', 'jobOffers'));
     }
-    public function allJoboffers(){
-     $offers=JobOffer::all();
-     return view('admin.offer',compact('offers'));
+    public function allJoboffers()
+    {
+        $jobseekers = $this->getAlljobseeker();
+        $companies = $this->getAllcompany();
+        $jobOffers = $this->getAlljoboffer();
+
+        $all_offers = JobOffer::withTrashed()->get();
+        return view('admin.offer', compact('all_offers','jobseekers', 'companies', 'jobOffers'));
     }
 }
