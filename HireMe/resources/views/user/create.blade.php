@@ -16,7 +16,7 @@
         <div>
             <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                 <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
-                    <form action="{{ url("home/store") }}" class="" method="post" enctype="multipart/form-data">
+                    <form action="{{ url("user/store") }}" class="" method="post" enctype="multipart/form-data">
                         @csrf
 
 
@@ -73,9 +73,9 @@
                                 <div class="md:col-span-1">
                                     <label for="address">Address</label>
                                     <input type="text" name="adresse" id="address"
-                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('addresse') }}"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('adresse') }}"
                                         placeholder="Enter your address" />
-                                        @error('address')
+                                        @error('addresse')
                                         <div class="text-sm text-red-500">{{ $message }}</div>
                                     @enderror
                                 </div>

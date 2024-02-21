@@ -1,15 +1,14 @@
 
-
 @extends('layouts.style')
 
-@section('from')
+@section('form')
   
 <div class="font-[sans-serif] text-[#333] mt-4 p-4 relative">
   <div class="max-w-md w-full mx-auto relative z-50">
-    <div class="flex items-center justify-center mb-8 ">
-     <img src="{{ asset('image/logo.png') }}" alt="logo" class="w-40 ">
+    <div class="flex items-center justify-center mb-8 bg-verblanc ">
+     <img src="{{ asset('image/logo1.png') }}" alt="logo" class="w-40 ">
     </div>
-    <div class="border border-gray-300 bg-white rounded-md p-8">
+    <div class="border border-gray-300 bg-white rounded-md p-5">
       <a href="{{ route('user.show') }}">
         <div class="p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 102, 1);transform: ;msFilter:;"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
@@ -55,8 +54,6 @@
       </form>
     </div>
   </div>
- 
 </div>
-
 @endsection
 

@@ -11,16 +11,10 @@
                 </svg>
                 <span class="sr-only">Info</span>
                 <div>
-                    <span class="font-medium"></span>
+                    <span class="font-medium">{{ session('error') }}</span>
                 </div>
             </div>
-            {{-- @extends('layouts.alert')
-
-    @section('alert')
-    {{ session('error') }}
-    @endsection --}}
         @endif
-
         @if (session('success'))
             <div class="flex items-center p-4 w-1/2  p-4 ml-12 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                 role="alert">
@@ -37,30 +31,4 @@
         @endif
         <livewire:job-offer/>
     @endsection
-    {{-- <div id="searchResults" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-       
-    </div> --}}
 
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#searchForm').keyup(function (){
-                var searchValue = $('#search').val().trim();
-                console.log(searchValue);
-                if (searchValue !== '') {
-                    var formData = $(this).serialize(); 
-                    $.ajax({
-                        url: '{{ route("offer.search") }}',
-                        type: 'GET',
-                        data: formData, 
-                        success: function(response) {
-                            $('#grid').hide();
-                            $('#searchResults').html(response).show();
-                        }
-                    });
-                } else { 
-                    $('#searchResults').hide();
-                }
-            });
-        });
-    </script> --}}

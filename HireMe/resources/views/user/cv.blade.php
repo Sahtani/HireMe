@@ -9,7 +9,7 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/resume.css') }}" media="all" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/resume.css') }}">
 
 </head>
 <body>

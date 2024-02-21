@@ -71,16 +71,13 @@ class Jobseeker extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-  
     { 
-        
         $jobseeker = Auth::user()->jobseeker;  
         $exs=$jobseeker->cv->experiences;
         $cursus=$jobseeker->cv->cursus;
         $skills=$jobseeker->cv->skills;
         $langues=$jobseeker->cv->langues;
-
-        return view('user/profile', ['jobseeker' => $jobseeker, 'user' => Auth::user(),'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues]);
+        return view('user/profile', ['jobseeker' => $jobseeker, 'user' => Auth::user(),'exs'=>$exs,'cursus'=>$cursus,'skills'=>$skills,'langues'=>$langues,'success' => 'Your profile is well-created.']);
     }
 
     public function showcv() 

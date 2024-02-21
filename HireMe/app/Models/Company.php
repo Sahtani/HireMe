@@ -13,6 +13,9 @@ class Company extends User
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable=['user_id','image','slogan','industry','description','phone'];
+
+    // protected $with = ['user'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

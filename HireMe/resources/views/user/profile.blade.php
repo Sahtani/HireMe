@@ -2,6 +2,20 @@
 @extends('layouts.nav')
 
 @section('content')
+@if (session('success'))
+            <div class="flex items-center p-4 w-1/2  p-4 ml-12 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium"> {{ session('success') }}</span>
+                </div>
+            </div>
+        @endif
     <div class=" bg-verblanc">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="  overflow-hidden shadow-sm sm:rounded-lg">
@@ -12,10 +26,13 @@
                                 <div class="w-full">
                                     <div class=" shadow rounded-lg p-6 bg-white ">
                                         <div class="flex flex-col items-center">
-                                            <img src=" {{ asset('storage/uploads/' . $jobseeker->image) }}"
-                                                class="w-20 h-20 bg-gray-300 rounded mb-4 shrink-0">
+                                            <div>
+                                                <img src=" {{ asset('storage/uploads/' . $jobseeker->image) }}"
+                                                class="w-full h-20 bg-gray-300 rounded mb-4 shrink-0">
                                             </img>
-                                            <h1 class="text-xl font-bold">{{ $user->name }}</h1>
+                                            </div>
+                                            
+                                            <h1 class="uppercase text-xl font-bold">{{ $user->name }}</h1>
                                             <p class="text-gray-700">{{ $jobseeker->title }}</p>
                                             <p class="text-gray-700">{{ $jobseeker->post }}</p>
                                             <div class="flex gap-1">
@@ -30,7 +47,7 @@
                                             </div>
                                         </div>
                                         <a href="{{ route('user.showcv') }}"> view cv</a><br>
-                                        <a href="{{ route('user.download') }}"> download cv</a>
+
                                         <div class="mt-6 flex flex-col gap-4 ">
                                             <h1 class="text-xl font-bold">Contact</h1>
                                             <div class="flex gap-1">
@@ -57,6 +74,24 @@
 
 
                                         </div>
+                                        <div class="flex justify-end">
+                                            <a href="{{ route('user.download') }}">
+                                                <button type="button"
+                                                    class=" flex items-center justify-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download
+                                                    cv
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24"
+                                                        style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
+                                                        <path
+                                                            d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </a>
+
+                                        </div>
+
                                     </div>
                                     <div class="bg-white border rounded-lg  border-bleu mt-8 p-4 shadow">
                                         <div>
@@ -69,9 +104,9 @@
                                         <div class="p-3">
                                             <div class="">
                                                 <div class="flex justify-between flex-wrap">
-                                                    <h2 class="text-xl font-bold mt-6 mb-4">Expereince</h2>
-                                                    <a href="{{ route('user.createexperience') }}"
-                                                        class="block text-white " type="button">
+                                                    <h2 class="text-xl font-bold p-2">Expereince</h2>
+                                                    <a href="{{ route('user.createexperience') }}" class="block text-white "
+                                                        type="button">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24"
                                                             style="fill: #000066;transform: ;msFilter:;">
@@ -79,13 +114,13 @@
                                                                 d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
                                                             </path>
                                                             <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
-                                                        </svg></a>
+                                                        </svg>
+                                                    </a>
                                                 </div>
-
                                             </div>
-                                            <div class="mb-6">
+                                            <div class="mb-6 p-2">
                                                 @foreach ($exs as $ex)
-                                                    <div class="flex justify-between flex-wrap gap-2 w-full">
+                                                    <div class="flex justify-between flex-wrap gap-2 w-full ">
                                                         <span class="text-gray-700 font-bold">{{ $ex->title }}</span>
                                                         <p>
                                                             <span class="text-gray-700 mr-2">at {{ $ex->company }}</span>
@@ -98,34 +133,30 @@
                                                     <p class="mt-2">
                                                         {{ $ex->desc }}
                                                     </p>
+                                                    <hr class="w-[100%]  h-[1px] border-gray-300 my-4">
                                                 @endforeach
-
+                                                
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <div class="bg-white border rounded-lg  border-bleu mt-8 shadow">
                                         <div class="p-3">
-                                            <div>
-                                                <div class="">
-                                                    <div class="flex justify-between flex-wrap">
-                                                        <h2 class="text-xl font-bold mt-6 mb-4">Formation</h2>
-                                                        <a href="{{ route('user.createcursus') }}">
-                                                            <button class="block text-white " type="button">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24"
-                                                                    style="fill: #000066;transform: ;msFilter:;">
-                                                                    <path
-                                                                        d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
-                                                                    </path>
-                                                                    <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
-                                                                </svg></button>
-                                                        </a>
+                                            <div class="flex justify-between flex-wrap">
+                                                <h2 class="text-xl font-bold p-2">Formation</h2>
+                                                <a href="{{ route('user.createcursus') }}">
+                                                    <button class="block text-white " type="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24"
+                                                            style="fill: #000066;transform: ;msFilter:;">
+                                                            <path
+                                                                d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
+                                                            </path>
+                                                            <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
+                                                        </svg></button>
+                                                </a>
 
-                                                    </div>
-
-                                                </div>
+                                            </div>
+                                            <div class="mb-6 p-2">
                                                 @foreach ($cursus as $cur)
                                                     <div class="flex justify-between flex-wrap gap-2 w-full">
                                                         <span class="text-gray-700 font-bold">{{ $cur->diplome }}</span>
@@ -138,117 +169,87 @@
                                                                 {{ \Carbon\Carbon::parse($ex->end_date)->format('Y') }}</span>
                                                         </p>
                                                     </div>
+                                                    <hr class="w-[100%]  h-[1px] border-gray-300 my-4">
                                                 @endforeach
-
                                             </div>
                                         </div>
-
-
                                     </div>
 
                                     <div class=" bg-white border rounded-lg  border-bleu mt-8 shadow">
-                                        <div class="p-4">
-                                            <div
-                                                class=" col-[2_/_span_4] row-span-5 rounded-md max-[768px]:col-span-8 max-[768px]:row-[5_/_span_1]">
-                                                <div class="flex justify-between mt-5 mx-4 mb-6">
-                                                    <div class="flex gap-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24"
-                                                            style="fill: #000066;transform: ;msFilter:;">
-                                                            <path
-                                                                d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm5 2h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm1-6h4v4h-4V5zM3 20a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6zm2-5h4v4H5v-4zm8 5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6zm2-5h4v4h-4v-4z">
-                                                            </path>
-                                                        </svg>
-                                                        <div class="text-gray-600 font-semibold text-xl">
-                                                            <h2 class="">Skills</h2>
-                                                        </div>
+                                        <div
+                                            class=" col-[2_/_span_4] row-span-5 rounded-md max-[768px]:col-span-8 max-[768px]:row-[5_/_span_1]">
+                                            <div class="flex justify-between p-4">
+
+                                                <div class="text-gray-900 font-semibold text-xl">
+                                                    <h2 class="">Skills</h2>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center">
+                                                        <button data-modal-target="authentication-modal"
+                                                            data-modal-toggle="authentication-modal"
+                                                            class="block text-white " type="button">
+ 
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" class="focus:"
+                                                                height="24" viewBox="0 0 24 24"
+                                                                style="fill: #000066;transform: ;msFilter:;">
+                                                                <path
+                                                                    d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
+                                                                </path>
+                                                                <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
+                                                            </svg>
+                                                        </button>
                                                     </div>
-
-                                                    <div>
-                                                        <div class="flex items-center">
-                                                            <button data-modal-target="authentication-modal"
-                                                                data-modal-toggle="authentication-modal"
-                                                                class="block text-white " type="button">
-
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                </div>
+                                            </div>
+                                            <div class="mb-">
+                                            @foreach ($skills as $skill)
+                                                <div class="ml-4">
+                                                    
+                                                            <h2 class="font-medium text-xl text-black  ">
+                                                                {{ $skill->name }}</h2>
+                                                </div>
+                                                <hr class="w-[95%]  h-[1px] border-gray-300 my-2  mx-2 ">
+                                            @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" bg-white border rounded-lg  border-bleu mt-8 shadow">
+                                        <div
+                                            class=" col-[2_/_span_4] row-span-5 rounded-md max-[768px]:col-span-8 max-[768px]:row-[5_/_span_1]">
+                                            <div class="flex justify-between p-4">
+                                                <div class="text-gray-900 font-bold text-xl">
+                                                    <h2 class="">Languages</h2>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center">
+                                                        <a href="{{ route('user.createlangue') }}">
+                                                            <button class="block text-white " type="button">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" class="focus:white"
                                                                     height="24" viewBox="0 0 24 24"
-                                                                    style="fill: #000066;transform: ;msFilter:;">
+                                                                    style="fill:#000066;transform: ;msFilter:;">
                                                                     <path
                                                                         d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
                                                                     </path>
                                                                     <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
                                                                 </svg></button>
-                                                        </div>
+                                                        </a>
+
                                                     </div>
                                                 </div>
-                                                @foreach ($skills as $skill)
-                                                    <div class="ml-4">
-                                                        <div>
-                                                            <div>
-                                                                <h2 class="font-medium text-xl text-black  ">
-                                                                    {{ $skill->name }}</h2>
-                                                            </div>
-                                                        </div>
-                                                        <hr class="w-[95%]  h-[1px] border-[#ffffff1f] mx-auto mt-3">
-                                                    </div>
-                                                @endforeach
-
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class=" bg-white border rounded-lg  border-bleu mt-8 shadow">
-                                        <div class="p-4">
-                                            <div
-                                                class=" col-[2_/_span_4] row-span-5 rounded-md max-[768px]:col-span-8 max-[768px]:row-[5_/_span_1]">
-                                                <div class="flex justify-between mt-5 mx-4 mb-6">
-                                                    <div class="flex gap-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24"
-                                                            style="fill: #000066;transform: ;msFilter:;">
-                                                            <path
-                                                                d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm5 2h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm1-6h4v4h-4V5zM3 20a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6zm2-5h4v4H5v-4zm8 5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6zm2-5h4v4h-4v-4z">
-                                                            </path>
-                                                        </svg>
-                                                        <div class="text-gray-600 font-bold text-xl">
-                                                            <h2 class="">Languages</h2>
-                                                        </div>
-                                                    </div>
-
-                                                    <div>
-                                                        <div class="flex items-center">
-                                                            <a href="{{ route('user.createlangue') }}">
-                                                                <button class="block text-white " type="button">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24"
-                                                                        style="fill:#000066;transform: ;msFilter:;">
-                                                                        <path
-                                                                            d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z">
-                                                                        </path>
-                                                                        <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path>
-                                                                    </svg></button>
-                                                            </a>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 @foreach ($langues as $langue)
                                                     <div class="ml-4">
-                                                        <div>
-                                                            <div>
                                                                 <h2 class="font-medium text-xl text-black  ">
                                                                     {{ $langue->name }}</h2>
-                                                                <p class="text-sm text-gra-400">{{ $langue->level }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <hr class="w-[95%]  h-[1px] border-[#ffffff1f] mx-auto mt-7 mb-7">
+                                                                <p class="text-sm">{{ $langue->level }}</p>     
                                                     </div>
+                                                    <hr class="w-[95%]  h-[1px] border-gray-300 mx-2 my-2">
                                                 @endforeach
-
-                                            </div>
+                                          
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -256,11 +257,9 @@
             </div>
         </div>
     </div>
+    </div>
 
     {{-- form skills --}}
-
-
-
 
     <!-- Main modal -->
     <div id="authentication-modal" tabindex="-1" aria-hidden="true"
@@ -307,17 +306,6 @@
                 </div>
             </div>
         </div>
-    </div>   
-    {{-- @if ($errors->any())
-        <script>
-            $(document).ready(function() {
-                $('#authentication-modal').show('show');
-            });
-        </script>
-    @endif --}}
-
-
-
-
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 @endsection

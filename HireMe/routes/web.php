@@ -8,12 +8,14 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\JobOffer;
 use App\Http\Controllers\Jobseeker as ControllersJobseeker;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillController;
-use App\Http\Controllers\LanguageController;
 use App\Models\Jobseeker;
 use Illuminate\Support\Facades\Route;
 use Khrigo\SkillsList\SkillsList as skills;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +30,15 @@ use Khrigo\SkillsList\SkillsList as skills;
 
 Route::get('/', function () {
     return view('home');
-})->name("home");
+})->name("home")->middleware('guest');
 
-Route::middleware("auth")->group(function () {
-    Route::prefix('home')->name('user.')->group(function () {
-        Route::get('/', [Home::class, 'index'])->name('index');
+
+
+
+Route::get('/home', [Home::class, 'index'])->name('index')->middleware(['auth', 'verified']);
+
+Route::middleware("auth",'role:user')->group(function () {
+    Route::prefix('user')->name('user.')->group(function () {
         Route::get('/create', [ControllersJobseeker::class, 'create'])->name('create');
         Route::post('/store', [ControllersJobseeker::class, 'store'])->name("store");
         Route::get('/show', [ControllersJobseeker::class, 'show'])->name('show');
@@ -52,27 +58,30 @@ Route::middleware("auth")->group(function () {
         // Language
         Route::get('/newlangue', [LanguageController::class, 'create'])->name('createlangue');
         Route::post('/storelangue', [LanguageController::class, 'store'])->name('storelangue');
+        // mailchimp
+        Route::post('/newsletter', [NewsletterController::class, 'Subscribe'])->name('subscribe');
     });
 
-    Route::prefix('company')->name('company.')->group(function () {
-        Route::get('/', [Home::class, 'index'])->name('index');
+    Route::prefix('company')->middleware('auth','role:company')->name('company.')->group(function () {
+        Route::get('/all', [Company::class, 'index'])->name("all");
         Route::get('/profile', [Company::class, 'show'])->name('profile');
 
         Route::get('/create', [Company::class, 'create'])->name('create');
 
         Route::post('/store', [Company::class, 'store'])->name("store");
-        Route::get('/all', [Company::class, 'all'])->name("all");
-        Route::get('/viewApplications', [Company::class, 'viewApplications'])->name("viewApplications");
+
     });
 
 
 
     // job offer
     Route::prefix('offer')->name('offer.')->group(function () {
-        Route::get('/', [Home::class, 'index'])->name('index');
         Route::get('/myoffer', [JobOffer::class, 'Myoffer'])->name('myoffer');
         Route::get('/create', [JobOffer::class, 'create'])->name('create');
         Route::post('/store', [JobOffer::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [JobOffer::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [JobOffer::class, 'update'])->name('update');
+
         Route::delete('/detroy/{id}', [JobOffer::class, 'destroy'])->name('destroy');
         Route::get('/show', [JobOffer::class, 'show'])->name('show');
         Route::get('/apply/{id}', [JobOffer::class, 'apply'])->name('apply');
@@ -80,9 +89,9 @@ Route::middleware("auth")->group(function () {
         Route::get('/search', [JobOffer::class, 'search'])->name('search');
     });
     // Route::resource("company", Company::class);
-    Route::get('/dashboard', function () {
-        return view('user/dashbord');
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('user/dashbord');
+    // });
 
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -94,8 +103,8 @@ Route::middleware("auth")->group(function () {
 
 // route of admin
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [Home::class, 'index'])->name('index');
-    Route::get('/dashboard', [Admin::class, 'index'])->name('index');
+
+    Route::get('/dashboard', [Admin::class, 'index'])->name('dash');
     Route::get('/company', [Admin::class, 'allCompanies'])->name('company');
     Route::get('/offers', [Admin::class, 'allJoboffers'])->name('offers');
 });

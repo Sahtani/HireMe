@@ -4,7 +4,7 @@
 @section('form')
  
 <div id="crud-modal" tabindex="-1" aria-hidden="true"
-class=" mt-10 flex     justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] ">
+class=" mt-10 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] ">
 <div class="relative p-4 w-full max-w-md max-h-full">
     <!-- Modal content -->
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

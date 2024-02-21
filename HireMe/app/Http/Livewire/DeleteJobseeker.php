@@ -11,8 +11,7 @@ class DeleteJobseeker extends Component
     public $jobseekerId;
     public function deleteJobseeker($id)
     {
-        $jobseeker = Jobseeker::findOrfail($id);
-        // dd($jobseeker);
+        $jobseeker = Jobseeker::with('user')->findOrfail($id);
         $jobseeker->delete();
     }
     public function render()

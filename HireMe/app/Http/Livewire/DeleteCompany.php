@@ -10,7 +10,7 @@ class DeleteCompany extends Component
     public $all_companies;
     public function deleteCompany($id)
     {
-        $company = Company::findOrfail($id);
+        $company = Company::with('user')->findOrfail($id);
         $company->delete();
     }
     public function render()

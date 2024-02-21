@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 
 class Admin extends Controller
 {
-
-
-
         private function getAlljobseeker()
         {
             return   Jobseeker::withTrashed()->count();
@@ -25,6 +22,7 @@ class Admin extends Controller
         {
             return JobOffer::withTrashed()->count();
         }
+        
         public function index()
         {
             $jobseekers = $this->getAlljobseeker();

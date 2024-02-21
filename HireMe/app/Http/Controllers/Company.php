@@ -18,8 +18,8 @@ class Company extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
+        return view("company.companies");     
     }
 
     /**
@@ -76,23 +76,6 @@ class Company extends Controller
 
         return view("company.profile", compact('company', 'user'));
     }
-    public function all()
-    {
-        $companies = User::where('role', 'company')->get();
-
-
-        return view("company.companies", compact('companies'));
-    }
-    public function viewApplications()
-    {    
-        $user = Auth::user();
-        $company = $user->company;
-        $jobApplications = $company->jobOffers()->with('jobSeekers')->get();
-        return view("company.application", compact('jobApplications','user'));
-    }
-
-
-
     /**
      * Show the form for editing the specified resource.
      *

@@ -12,10 +12,13 @@ class JobOffer extends Component
     {
         $searchItem = '%'. $this->search .'%';
         return view('livewire.job-offer', [
-            "offers" => ModelsJobOffer::where("title", $searchItem)
-            ->orWhere('type_contrat', 'like', $searchItem)
-            ->orWhere('location', 'like', $searchItem)
-            ->get()
+            "offers" => ModelsJobOffer::where('title', 'like', $searchItem)
+                ->orWhere('type_contrat', 'like', $searchItem)
+                ->orWhere('location', 'like', $searchItem)
+                ->orWhereHas('skills', function ($query) use ($searchItem) {
+                    $query->where('name', 'like', '%' . $searchItem . '%');
+                })
+                ->get()
         ]);
     }
 }
