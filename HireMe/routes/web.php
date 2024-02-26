@@ -37,7 +37,7 @@ Route::get('/', function () {
 
 Route::get('/home', [Home::class, 'index'])->name('index')->middleware(['auth', 'verified']);
 
-Route::middleware("auth",'role:user')->group(function () {
+Route::middleware("auth",'user')->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/create', [ControllersJobseeker::class, 'create'])->name('create');
         Route::post('/store', [ControllersJobseeker::class, 'store'])->name("store");
@@ -62,7 +62,7 @@ Route::middleware("auth",'role:user')->group(function () {
         Route::post('/newsletter', [NewsletterController::class, 'Subscribe'])->name('subscribe');
     });
 
-    Route::prefix('company')->middleware('auth','role:company')->name('company.')->group(function () {
+    Route::prefix('company')->middleware('auth','company')->name('company.')->group(function () {
         Route::get('/all', [Company::class, 'index'])->name("all");
         Route::get('/profile', [Company::class, 'show'])->name('profile');
 
@@ -102,12 +102,12 @@ Route::middleware("auth",'role:user')->group(function () {
 
 
 // route of admin
-Route::prefix('admin')->name('admin.')->group(function () {
-
+Route::prefix('admin')->middleware('auth', 'admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [Admin::class, 'index'])->name('dash');
     Route::get('/company', [Admin::class, 'allCompanies'])->name('company');
     Route::get('/offers', [Admin::class, 'allJoboffers'])->name('offers');
 });
+
 
 
 

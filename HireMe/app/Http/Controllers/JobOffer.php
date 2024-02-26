@@ -155,8 +155,9 @@ class JobOffer extends Controller
      */
     public function destroy($id)
     {
-        $offer = ModelsJobOffer::findOrfail($id);
-        $offer->delete();
+        $offer = ModelsJobOffer::withTrashed()->findOrFail($id);
+        $offer->forceDelete();
         return redirect()->route('offer.myoffer');
     }
+    
 }

@@ -6,9 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectBasedOnRole
+class User
 {
-    /**z
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -20,19 +20,14 @@ class RedirectBasedOnRole
         if (Auth::check()) {
             $user = Auth::user();
             $role = $user->role;
-
-            switch ($role) {
-                case 'user':
-                    return $next($request);
-                case 'company':
-                    return redirect()->route('company.profile');
-                case 'admin':
-                    return redirect()->route('admin.dash');
-                default:
-                    return redirect('/');
+            if ($role === 'user') {
+                return $next($request);
+            }elseif($role === 'company'){
+                return redirect()->route('company.profile');
+            }else{      
+                return redirect()->route('admin.dash');
             }
-        }
+        }   return redirect('/login');  
     
-        return redirect('/login');
     }
 }
